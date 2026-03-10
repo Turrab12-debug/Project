@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+
+<style>
+/* Reset & Global */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  background:#f4f6f9;
+}
+
+/* Main content wrapper */
+.content-wrapper{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+/* Contact Container */
+.contact-container{
+  background:white;
+  padding:40px;
+  width:400px;
+  max-width:100%;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+/* Headings */
+.contact-container h1{
+  margin-bottom:10px;
+  font-size:28px;
+}
+
+.subtitle{
+  color:#777;
+  margin-bottom:25px;
+  font-size:16px;
+}
+
+/* Form Inputs */
+form input,
+form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-size:14px;
+}
+
+textarea{
+  height:100px;
+  resize:none;
+}
+
+/* Button */
+button{
+  width:100%;
+  padding:12px;
+  background:#019a3c;
+  border:none;
+  color:white;
+  font-size:16px;
+  border-radius:5px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#03851d;
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:999;
+}
+
+.popup-content{
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  width:100%;
+  max-width:350px;
+  animation:popup 0.4s ease;
+}
+
+.popup-content h2{
+  margin-bottom:10px;
+  color:#333;
+}
+
+.popup-content button{
+  margin-top:15px;
+  background:#019a3c;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:5px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.popup-content button:hover{
+  background:#03851d;
+}
+
+/* Popup Animation */
+@keyframes popup{
+  from{transform:scale(0.7); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+/* Footer Styles */
+.footer{
+    background:#222;
+    color:#fff;
+    padding:5px 10px;
+}
+
+.footer .box-container{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:20px;
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.footer .box h3{
+    font-size:18px;
+    margin-bottom:15px;
+    color:#fff;
+}
+
+.footer .box a{
+    display:block;
+    color:#bbb;
+    text-decoration:none;
+    margin-bottom:9px;
+    transition:0.3s;
+}
+
+.footer .box a:hover{
+    color:#019a3c;
+}
+
+.footer .box a i{
+    margin-right:10px;
+}
+
+.footer .credit{
+    text-align:center;
+    margin-top:30px;
+    font-size:14px;
+    color:#aaa;
+}
+
+.footer .credit span{
+    color:#019a3c;
+    font-weight:bold;
+}
+
+/* Responsive Footer */
+@media (max-width:991px){
+    .footer .box-container{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media (max-width:768px){
+    .footer .box-container{
+        grid-template-columns:1fr;
+    }
+    .footer{
+        padding:40px 15px;
+    }
+    .footer .box h3{
+        font-size:16px;
+    }
+    .footer .box a{
+        font-size:14px;
+    }
+    .footer .credit{
+        font-size:13px;
+    }
+}
+@media (max-width:450px){
+    .footer{
+        padding:20px 10px;
+    }
+    .footer .box h3{
+        font-size:15px;
+    }
+    .footer .box a{
+        font-size:13px;
+    }
+    .footer .credit{
+        font-size:12px;
+    }
+}
+
+/* Responsive Contact Form */
+@media (max-width:768px){
+  .contact-container{
+    width:100%;
+    padding:25px;
+  }
+  .contact-container h1{font-size:24px;}
+  .subtitle{font-size:14px;}
+  form input, form textarea{font-size:13px; padding:10px;}
+  button{font-size:14px; padding:10px;}
+}
+@media (max-width:450px){
+  .contact-container{padding:20px;}
+  .contact-container h1{font-size:22px;}
+  .subtitle{font-size:13px;}
+  form input, form textarea{font-size:12px; padding:8px;}
+  button{font-size:13px; padding:8px;}
+}
+</style>
+</head>
+<body>
+
+<div class="content-wrapper">
+<div class="contact-container">
+  <h1>Get In Touch</h1>
+  <p class="subtitle">Send us your message and we will reply soon.</p>
+
+  <form id="contactForm">
+    <input type="text" name="name" placeholder="Enter Your Name" required>
+    <input type="email" name="email" placeholder="Enter Your Email" required>
+    <input type="number" name="phone" placeholder="Enter Phone Number" maxlength="11" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button> <br><br>
+     <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+  </form>
+</div>
+</div>
+
+<!-- Thank You Popup -->
+<div class="popup" id="thankPopup">
+  <div class="popup-content">
+    <h2>Thank You!</h2>
+    <p>Your message has been sent successfully.</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<!-- Footer -->
+
+  <div class="footer">
+    <div class="credit">&copy; 2026 | <span>Turrab Haider</span> All Rights Reserved</div>
+  </div>
+</section>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+// AJAX form submission to FormSubmit
+const form = document.getElementById("contactForm");
+form.addEventListener("submit", function(e){
+    e.preventDefault(); // Prevent redirect
+
+    const formData = new FormData(form);
+
+    fetch("https://formsubmit.co/ajax/turrabhaider061@gmail.com", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("thankPopup").style.display = "flex";
+        form.reset();
+    })
+    .catch(error => {
+        alert("Oops! Something went wrong. Try again.");
+        console.error(error);
+    });
+});
+
+function closePopup(){
+  document.getElementById("thankPopup").style.display="none";
+}
+</script>
+</body>
+</html>
