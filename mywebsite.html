@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins, sans-serif;
+}
+
+body{
+line-height:1.6;
+}
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:#000000c0;
+padding:15px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+flex-wrap:wrap;
+}
+
+.logo{
+color:white;
+font-size:24px;
+font-weight:bold;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-size:16px;
+}
+
+nav a:hover{
+color:#16b97a;
+}
+
+span{
+color:#06a467;
+}
+
+.hero{
+height:100vh;
+background:url("https://images.unsplash.com/photo-1544986581-efac024faf62?q=80&w=1170&auto=format&fit=crop") center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+
+.hero h1{
+font-size:55px;
+color:#eef3f1;
+text-transform: capitalize;
+text-shadow: #000000c0 0px 5px 15px;
+}
+
+.hero p{
+font-size:20px;
+margin:10px 0;
+text-shadow: #000000c0 0px 5px 15px;
+}
+
+.btn{
+padding:12px 30px;
+border:none;
+background:#16b97a;
+color:white;
+cursor:pointer;
+border-radius:30px;
+font-size:16px;
+text-decoration:none;
+}
+
+section{
+padding:80px 10%;
+text-align:center;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.gallery img{
+width:100%;
+border-radius:10px;
+}
+
+.contact form{
+max-width:500px;
+margin:auto;
+display:flex;
+flex-direction:column;
+}
+
+.contact input,
+.contact textarea{
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.contact button{
+margin-top:10px;
+padding:12px;
+background:#16b97a;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+.booking-popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:flex;
+justify-content:center;
+align-items:center;
+visibility:hidden;
+opacity:0;
+transition:0.3s;
+}
+
+.booking-popup.active{
+visibility:visible;
+opacity:1;
+}
+
+.popup-content{
+background:white;
+padding:30px;
+border-radius:10px;
+width:90%;
+max-width:400px;
+position:relative;
+}
+
+.popup-content input,
+.popup-content select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+}
+
+.contact{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#16b97a;
+color:white;
+padding:12px 20px;
+border-radius:30px;
+text-decoration:none;
+}
+
+.close-btn{
+position:absolute;
+top:10px;
+right:15px;
+font-size:24px;
+background:none;
+cursor:pointer;
+}
+
+footer{
+background:#000000c0;
+color:#ccc;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+header{
+padding:15px 20px;
+flex-direction:column;
+align-items:flex-start;
+}
+
+nav{
+margin-top:10px;
+}
+
+nav a{
+margin:5px 10px;
+font-size:14px;
+}
+
+.hero h1{
+font-size:35px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+section{
+padding:70px 5%;
+}
+
+.contact{
+bottom:15px;
+right:15px;
+padding:10px 16px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Turrab Haider</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#rooms">Rooms</a>
+<a href="#services">Services</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+<a href="index.html">Main Website</a>
+</nav>
+
+</header>
+
+<section id="home" class="hero">
+
+<div>
+<h1>Welcome to <span>Hotel Booking</span></h1>
+<p>Your comfort, our priority</p>
+<button class="btn" id="bookNow">Book Now</button>
+</div>
+
+</section>
+
+<section id="about">
+
+<h2>About Us</h2>
+
+<p>
+Luxury Stay Hotel offers comfortable rooms, premium facilities,
+and excellent hospitality for our guests.
+</p>
+
+</section>
+
+<section id="rooms">
+
+<h2>Our Rooms</h2>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSVDRiajFgRSxe7B54xwJLB_pTN5jh4oWlwQ&s">
+<h3>Deluxe Room</h3>
+<p>Spacious room with modern amenities.</p>
+</div>
+
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXMh0aG98Fxh1m3mIVPHTHBK4Qi06tW3olqw&s">
+<h3>Suite</h3>
+<p>Luxury suite with premium facilities.</p>
+</div>
+
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoliCXz0LOqHi5L9I2EN11IZv30_rKDcraig&s">
+<h3>Standard Room</h3>
+<p>Comfortable room for budget stay.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="services">
+
+<h2>Our Services</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Restaurant</h3>
+<p>Enjoy delicious meals in our restaurant.</p>
+</div>
+
+<div class="card">
+<h3>Spa</h3>
+<p>Relax with our spa and wellness services.</p>
+</div>
+
+<div class="card">
+<h3>Free WiFi</h3>
+<p>High speed internet throughout the hotel.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="gallery">
+
+<h2>Gallery</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?q=80&w=1171&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?w=600&auto=format&fit=crop&q=60">
+<img src="https://plus.unsplash.com/premium_photo-1661964402307-02267d1423f5?q=80&w=1073&auto=format&fit=crop">
+
+</div>
+
+</section>
+
+<a href="contact.html" class="contact">Contact Us</a>
+
+<div class="booking-popup" id="bookingPopup">
+
+<div class="popup-content">
+
+<button class="close-btn" id="closePopup">&times;</button>
+
+<h2>Book Your Room</h2>
+
+<form action="https://formsubmit.co/turrabhaider061@gmail.com" method="POST">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="tel" name="number" placeholder="Phone Number" required maxlength="11">
+
+<input type="date" name="checkin" required>
+
+<input type="date" name="checkout" required>
+
+<select name="room">
+<option>Deluxe</option>
+<option>Suite</option>
+<option>Standard</option>
+</select>
+
+<button class="btn" type="submit">Book Now</button>
+
+</form>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Turrab Haider. All rights reserved.
+</footer>
+
+<script>
+
+const bookBtn=document.getElementById("bookNow")
+const popup=document.getElementById("bookingPopup")
+const closeBtn=document.getElementById("closePopup")
+
+bookBtn.onclick=function(){
+popup.classList.add("active")
+}
+
+closeBtn.onclick=function(){
+popup.classList.remove("active")
+}
+
+window.onclick=function(e){
+if(e.target===popup){
+popup.classList.remove("active")
+}
+}
+
+</script>
+
+</body>
+</html>
