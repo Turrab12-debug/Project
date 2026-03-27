@@ -20,28 +20,25 @@ font-family:Poppins, sans-serif;
 
 body{
 line-height:1.6;
+padding-top:75px;
 }
 
+/* HEADER */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.75); /* better compatibility */
-    padding: 10px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-/* Important: prevent content hiding under header */
-body {
-    padding-top: 70px; /* adjust according to header height */
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background: rgba(0, 0, 0, 0.75);
+padding: 12px 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 1000;
 }
 
 .logo{
-color: #00c896;
+color:#00c896;
 font-size:24px;
 font-weight:bold;
 }
@@ -65,9 +62,10 @@ span{
 color:#00c896;
 }
 
+/* HERO */
 .hero{
-height:100vh;
-background:url("https://images.unsplash.com/photo-1723384747376-90f201a3bd55?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmFja2dyb3VuZCUyMGltYWdlfGVufDB8fDB8fHww") center/cover no-repeat;
+min-height:100vh;
+background:url("https://images.unsplash.com/photo-1723384747376-90f201a3bd55?w=1200&auto=format&fit=crop&q=60") center/cover no-repeat;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -78,18 +76,18 @@ padding:15px;
 
 .hero h1{
 font-size:35px;
-color: #FFFFFF;
-text-transform: capitalize;
-text-shadow: #000000c0 0px 7px 20px;
-
+color:#fff;
+text-transform:capitalize;
+text-shadow:#000000c0 0px 7px 20px;
 }
 
 .hero p{
 font-size:20px;
 margin:10px 0;
-text-shadow: #000000c0 0px 5px 15px;
+text-shadow:#000000c0 0px 5px 15px;
 }
 
+/* BUTTON */
 .btn{
 padding:12px 30px;
 border:none;
@@ -99,7 +97,7 @@ cursor:pointer;
 border-radius:30px;
 font-size:16px;
 text-decoration:none;
-  tect-shadow: #000000c0 0px 5px 15px;
+text-shadow:#000000c0 0px 5px 15px;
 }
 
 section{
@@ -107,6 +105,7 @@ padding:80px 10%;
 text-align:center;
 }
 
+/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -127,6 +126,7 @@ border-radius:10px;
 margin-bottom:10px;
 }
 
+/* GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -139,30 +139,7 @@ width:100%;
 border-radius:10px;
 }
 
-.contact form{
-max-width:500px;
-margin:auto;
-display:flex;
-flex-direction:column;
-}
-
-.contact input,
-.contact textarea{
-padding:12px;
-margin:8px 0;
-border:1px solid #ccc;
-border-radius:5px;
-}
-
-.contact button{
-margin-top:10px;
-padding:12px;
-background:#16b97a;
-border:none;
-color:white;
-cursor:pointer;
-}
-
+/* POPUP */
 .booking-popup{
 position:fixed;
 top:0;
@@ -200,6 +177,7 @@ margin:8px 0;
 border:1px solid #ccc;
 }
 
+/* CONTACT BUTTON */
 .contact{
 position:fixed;
 bottom:20px;
@@ -220,6 +198,7 @@ background:none;
 cursor:pointer;
 }
 
+/* FOOTER */
 footer{
 background:#0b3d2e;
 color:#fff;
@@ -228,8 +207,12 @@ padding:10px;
 margin-top:20px;
 }
 
-/* RESPONSIVE */
+/* STOP SCROLL WHEN POPUP OPEN */
+body.popup-open{
+overflow:hidden;
+}
 
+/* RESPONSIVE */
 @media(max-width:768px){
 
 header{
@@ -248,7 +231,7 @@ font-size:14px;
 }
 
 .hero h1{
-font-size:35px;
+font-size:28px;
 }
 
 .hero p{
@@ -274,37 +257,29 @@ padding:10px 16px;
 <body>
 
 <header>
-
 <div class="logo">Turrab Haider</div>
-
 <nav>
-  <a href="index.html">Main website</a>
+<a href="index.html">Main website</a>
 </nav>
 </header>
 
 <section id="home" class="hero">
-
 <div>
 <h1>Welcome to <span>Hotel Booking</span></h1>
 <p>Your comfort, our priority</p>
 <button class="btn" id="bookNow">Book Now</button>
 </div>
-
 </section>
 
 <section id="about">
-
 <h2>About Us</h2>
-
 <p>
 Luxury Stay Hotel offers comfortable rooms, premium facilities,
 and excellent hospitality for our guests.
 </p>
-
 </section>
 
 <section id="rooms">
-
 <h2>Our Rooms</h2>
 
 <div class="cards">
@@ -328,44 +303,38 @@ and excellent hospitality for our guests.
 </div>
 
 </div>
-
 </section>
 
 <section id="services">
-
 <h2>Our Services</h2>
 
 <div class="cards">
 
 <div class="card">
-  <img src="https://media.cntraveler.com/photos/688a8149458f46b909acb42a/master/w_2560%2Cc_limit/aliee_littlehousebar_103456.jpg">
+<img src="https://media.cntraveler.com/photos/688a8149458f46b909acb42a/master/w_2560%2Cc_limit/aliee_littlehousebar_103456.jpg">
 <h3>Restaurant</h3>
 <p>Enjoy delicious meals in our restaurant.</p>
 </div>
 
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZPgchpZJTjc1-ES3r93tT8cqXA-3OUqPpAlBp7BsNRMxMZbXXiQu4bfRA&s=10">
-
 <h3>24/7 Support</h3>
 <p>Help is Just a Message Away.</p>
 </div>
 
 <div class="card">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3-ZrlJuKdCVqiYjN2Lutjprfg665CkiUNtxQ6jJ0Lam3xglDmLMDsvdmn&s=10">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3-ZrlJuKdCVqiYjN2Lutjprfg665CkiUNtxQ6jJ0Lam3xglDmLMDsvdmn&s=10">
 <h3>Free WiFi</h3>
 <p>High speed internet throughout the hotel.</p>
 </div>
 
 </div>
-
 </section>
 
 <section id="gallery">
-
 <h2>Gallery</h2>
 
 <div class="gallery">
-
 <img src="https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?q=80&w=1171&auto=format&fit=crop">
 <img src="https://images.unsplash.com/photo-1621293954908-907159247fc8?w=600&auto=format&fit=crop&q=60">
 <img src="https://plus.unsplash.com/premium_photo-1661964402307-02267d1423f5?q=80&w=1073&auto=format&fit=crop">
@@ -377,7 +346,6 @@ and excellent hospitality for our guests.
 <a href="contact.html" class="contact">Contact Us</a>
 
 <div class="booking-popup" id="bookingPopup">
-
 <div class="popup-content">
 
 <button class="close-btn" id="closePopup">&times;</button>
@@ -385,15 +353,10 @@ and excellent hospitality for our guests.
 <h2>Book Your Room</h2>
 
 <form action="https://formsubmit.co/turrabhaider061@gmail.com" method="POST">
-
 <input type="text" name="name" placeholder="Full Name" required>
-
 <input type="email" name="email" placeholder="Email" required>
-
 <input type="tel" name="number" placeholder="Phone Number" required maxlength="11">
-
 <input type="date" name="checkin" required>
-
 <input type="date" name="checkout" required>
 
 <select name="room">
@@ -403,11 +366,9 @@ and excellent hospitality for our guests.
 </select>
 
 <button class="btn" type="submit">Book Now</button>
-
 </form>
 
 </div>
-
 </div>
 
 <footer>
@@ -416,21 +377,24 @@ and excellent hospitality for our guests.
 
 <script>
 
-const bookBtn=document.getElementById("bookNow")
-const popup=document.getElementById("bookingPopup")
-const closeBtn=document.getElementById("closePopup")
+const bookBtn = document.getElementById("bookNow");
+const popup = document.getElementById("bookingPopup");
+const closeBtn = document.getElementById("closePopup");
 
-bookBtn.onclick=function(){
-popup.classList.add("active")
+bookBtn.onclick = function(){
+popup.classList.add("active");
+document.body.classList.add("popup-open");
 }
 
-closeBtn.onclick=function(){
-popup.classList.remove("active")
+closeBtn.onclick = function(){
+popup.classList.remove("active");
+document.body.classList.remove("popup-open");
 }
 
-window.onclick=function(e){
-if(e.target===popup){
-popup.classList.remove("active")
+window.onclick = function(e){
+if(e.target === popup){
+popup.classList.remove("active");
+document.body.classList.remove("popup-open");
 }
 }
 
