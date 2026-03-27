@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Foreign Trip</title>
 <style>
-/* Reset & Global */
 *{
   margin:0;
   padding:0;
@@ -31,7 +30,8 @@ header{
   position:fixed;
   width:100%;
   top:0;
-  z-index:100;
+  z-index:1000;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
 }
 
 .logo{
@@ -48,20 +48,22 @@ nav a{
   color:#fff;
   margin-left:20px;
   text-decoration:none;
-  transition:0.3s;
-  padding:6px 12px;
+  padding:8px 12px;
   border-radius:5px;
+  transition:0.3s;
+  font-weight:bold;
 }
 
 nav a:hover{
-  color:#00c896;
-  background:rgba(0,200,150,0.1);
+  background:#00c896;
+  color:#0b3d2e;
 }
 
 .menu-btn{
   display:none;
-  font-size:26px;
+  font-size:22px;
   cursor:pointer;
+  color:#00c896;
 }
 
 /* Hero */
@@ -72,8 +74,7 @@ nav a:hover{
   justify-content:center;
   align-items:center;
   text-align:center;
-  color:#00c896;
-  padding:20px;
+  color:#fff;
   position:relative;
   overflow:hidden;
 }
@@ -114,7 +115,7 @@ nav a:hover{
   background:#00c896;
   color:#fff;
   border:none;
-  padding:12px 30px;
+  padding:10px 30px;
   border-radius:5px;
   transition:0.3s;
 }
@@ -130,7 +131,7 @@ nav a:hover{
 
 /* Sections */
 .section{
-  padding:120px 20px 40px 20px;
+  padding:100px 20px 40px 20px;
   text-align:center;
   opacity:0;
   transform:translateY(50px);
@@ -195,12 +196,77 @@ nav a:hover{
   transform:scale(1.1);
 }
 
+/* Booking Popup */
+.booking-popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  visibility:hidden;
+  opacity:0;
+  transition:0.3s;
+  z-index:2000;
+}
+
+.booking-popup.active{
+  visibility:visible;
+  opacity:1;
+}
+
+.popup-content{
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  width:90%;
+  max-width:400px;
+  position:relative;
+}
+
+.popup-content input,
+.popup-content select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+.popup-content button{
+  width:100%;
+  padding:12px;
+  background:#00c896;
+  border:none;
+  color:white;
+  cursor:pointer;
+  border-radius:5px;
+  transition:0.3s;
+}
+
+.popup-content button:hover{
+  background:#0b3d2e;
+}
+
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  background:none;
+  cursor:pointer;
+}
+
 /* Footer */
 footer{
   background:#0b3d2e;
   color:#fff;
   text-align:center;
-  padding:15px;
+  padding:10px;
+  margin-top:20px;
 }
 
 /* Mobile */
@@ -224,17 +290,10 @@ footer{
     display:block;
   }
   .hero h1{
-    font-size:28px;
+    font-size:30px;
   }
   .hero p{
     font-size:14px;
-  }
-}
-
-/* Responsive cards for mobile */
-@media(max-width:450px){
-  .cards{
-    grid-template-columns:1fr;
   }
 }
 </style>
@@ -247,7 +306,6 @@ footer{
   <nav id="nav">
     <a href="#">Home</a>
     <a href="#destinations">Destinations</a>
-    <a href="#countries">Countries</a>
     <a href="#about">About</a>
     <a href="index.html">Main Website</a>
   </nav>
@@ -256,71 +314,46 @@ footer{
 <section class="hero">
   <img src="https://images.unsplash.com/photo-1499807082027-7f49ba157a4a?q=80&w=1112&auto=format&fit=crop" class="active">
   <h1>Explore The World</h1>
-  <p>Plan your dream trip with ease</p>
-  <button class="btn" onclick="openBooking()">Start Now</button>
+  <p>Your dream foreign trips await</p>
+  <button class="btn" id="startBooking">Start Booking</button>
 </section>
 
-<!-- Destinations -->
 <section id="destinations" class="section">
-  <h2>Popular Destinations</h2>
-  <div class="cards">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=1120&auto=format&fit=crop">
-      <h3>Paris</h3>
-      <div class="price">Rs 250,000</div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1170&auto=format&fit=crop">
-      <h3>Dubai</h3>
-      <div class="price">Rs 120,000</div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1497373637916-e47a55e22d0a?w=1200&auto=format&fit=crop&q=60">
-      <h3>Canada</h3>
-      <div class="price">Rs 300,000</div>
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&auto=format&fit=crop&q=60">
-      <h3>Turkey</h3>
-      <div class="price">Rs 230,000</div>
-    </div>
-  </div>
-</section>
-
-<!-- Countries API -->
-<section id="countries" class="section">
-  <h2>Countries Info</h2>
-  <div class="cards" id="countryCards"></div>
+<h2>Popular Destinations</h2>
+<div class="cards" id="countryCards"></div>
 </section>
 
 <section id="about" class="section">
-  <h2>About Us</h2>
-  <p>We help you plan your dream foreign trip easily with the best destinations and deals worldwide.</p>
+<h2>About Us</h2>
+<p>We help you plan your dream foreign trip easily with the best destinations and deals worldwide.</p>
 </section>
 
-<footer>
-  <p>© 2026 <strong>TURRAB HAIDER</strong> | All rights are reserved</p>
-</footer>
-
 <!-- Booking Popup -->
-<div class="popup" id="bookingPopup" style="display:none;">
+<div class="booking-popup" id="bookingPopup">
   <div class="popup-content">
+    <button class="close-btn" id="closePopup">&times;</button>
     <h2>Book Your Trip</h2>
     <form action="https://formsubmit.co/turrabhaider061@gmail.com" method="POST">
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="tel" name="phone" placeholder="Phone Number" required maxlength="11">
       <select name="destination" required>
+        <option value="">Select Destination</option>
         <option value="Paris">Paris</option>
         <option value="Dubai">Dubai</option>
         <option value="Canada">Canada</option>
         <option value="Turkey">Turkey</option>
       </select>
-      <button type="submit" class="btn">Book Now</button>
+      <input type="date" name="departure" required>
+      <input type="date" name="return" required>
+      <button type="submit">Book Now</button>
     </form>
-    <button class="btn" onclick="closeBooking()" style="margin-top:10px;">Close</button>
   </div>
 </div>
+
+<footer>
+<p>© 2026 <strong>TURRAB HAIDER</strong> | All rights are reserved</p>
+</footer>
 
 <script>
 // Mobile menu toggle
@@ -328,12 +361,12 @@ function toggleMenu(){
   document.getElementById("nav").classList.toggle("active");
 }
 
-// Hero image slider
+// Hero slider
 let heroImages = document.querySelectorAll(".hero img");
 let current = 0;
 setInterval(()=>{
   heroImages[current].classList.remove("active");
-  current = (current+1) % heroImages.length;
+  current = (current+1)%heroImages.length;
   heroImages[current].classList.add("active");
 },4000);
 
@@ -357,20 +390,25 @@ window.addEventListener('scroll', ()=>{
   });
 });
 
-// Booking popup functions
-function openBooking(){
-  document.getElementById('bookingPopup').style.display='flex';
-}
-function closeBooking(){
-  document.getElementById('bookingPopup').style.display='none';
-}
+// Booking popup
+const startBtn = document.getElementById("startBooking");
+const popup = document.getElementById("bookingPopup");
+const closeBtn = document.getElementById("closePopup");
 
-// Fetch countries data
-fetch('https://restcountries.com/v3.1/all')
-  .then(res => res.json())
+startBtn.onclick = function(){ popup.classList.add("active"); }
+closeBtn.onclick = function(){ popup.classList.remove("active"); }
+window.onclick = function(e){ if(e.target === popup) popup.classList.remove("active"); }
+
+// Fetch countries API
+fetch('https://restcountries.com/v3.1/all?fields=name,capital,region,flags,population')
+  .then(res => {
+    if(!res.ok) throw new Error('Network error');
+    return res.json();
+  })
   .then(data => {
     const container = document.getElementById('countryCards');
-    data.slice(0, 12).forEach(country => {
+    container.innerHTML='';
+    data.slice(0,12).forEach(country=>{
       const card = document.createElement('div');
       card.classList.add('card');
       card.innerHTML = `
@@ -383,7 +421,11 @@ fetch('https://restcountries.com/v3.1/all')
       container.appendChild(card);
     });
   })
-  .catch(err => console.error(err));
+  .catch(err=>{
+    console.error('API Error:', err);
+    const container = document.getElementById('countryCards');
+    container.innerHTML='<p style="color:red;">Unable to load country data. Try again later.</p>';
+  });
 </script>
 
 </body>
