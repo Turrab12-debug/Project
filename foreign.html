@@ -320,7 +320,33 @@ footer{
 
 <section id="destinations" class="section">
 <h2>Popular Destinations</h2>
-<div class="cards" id="countryCards"></div>
+<div class="cards">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=1120&auto=format&fit=crop">
+    <h3>Paris</h3>
+    <div class="price">Rs 250,000</div>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1170&auto=format&fit=crop">
+    <h3>Dubai</h3>
+    <div class="price">Rs 120,000</div>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1497373637916-e47a55e22d0a?w=1200&auto=format&fit=crop&q=60">
+    <h3>Canada</h3>
+    <div class="price">Rs 300,000</div>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&auto=format&fit=crop&q=60">
+    <h3>Turkey</h3>
+    <div class="price">Rs 230,000</div>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?w=1200&auto=format&fit=crop&q=60">
+    <h3>USA</h3>
+    <div class="price">Rs 350,000</div>
+  </div>
+</div>
 </section>
 
 <section id="about" class="section">
@@ -343,6 +369,7 @@ footer{
         <option value="Dubai">Dubai</option>
         <option value="Canada">Canada</option>
         <option value="Turkey">Turkey</option>
+        <option value="USA">USA</option>
       </select>
       <input type="date" name="departure" required>
       <input type="date" name="return" required>
@@ -357,9 +384,7 @@ footer{
 
 <script>
 // Mobile menu toggle
-function toggleMenu(){
-  document.getElementById("nav").classList.toggle("active");
-}
+function toggleMenu(){ document.getElementById("nav").classList.toggle("active"); }
 
 // Hero slider
 let heroImages = document.querySelectorAll(".hero img");
@@ -395,37 +420,9 @@ const startBtn = document.getElementById("startBooking");
 const popup = document.getElementById("bookingPopup");
 const closeBtn = document.getElementById("closePopup");
 
-startBtn.onclick = function(){ popup.classList.add("active"); }
-closeBtn.onclick = function(){ popup.classList.remove("active"); }
-window.onclick = function(e){ if(e.target === popup) popup.classList.remove("active"); }
-
-// Fetch countries API
-fetch('https://restcountries.com/v3.1/all?fields=name,capital,region,flags,population')
-  .then(res => {
-    if(!res.ok) throw new Error('Network error');
-    return res.json();
-  })
-  .then(data => {
-    const container = document.getElementById('countryCards');
-    container.innerHTML='';
-    data.slice(0,12).forEach(country=>{
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
-        <img src="${country.flags.svg}" alt="${country.name.common} Flag">
-        <h3>${country.name.common}</h3>
-        <p>Capital: ${country.capital ? country.capital[0] : 'N/A'}</p>
-        <p>Region: ${country.region}</p>
-        <p>Population: ${country.population.toLocaleString()}</p>
-      `;
-      container.appendChild(card);
-    });
-  })
-  .catch(err=>{
-    console.error('API Error:', err);
-    const container = document.getElementById('countryCards');
-    container.innerHTML='<p style="color:red;">Unable to load country data. Try again later.</p>';
-  });
+startBtn.onclick = ()=>popup.classList.add("active");
+closeBtn.onclick = ()=>popup.classList.remove("active");
+window.onclick = (e)=>{ if(e.target === popup) popup.classList.remove("active"); }
 </script>
 
 </body>
