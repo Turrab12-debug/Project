@@ -20,27 +20,38 @@ font-family:Poppins, sans-serif;
 
 body{
 line-height:1.6;
-padding-top:75px;
 }
 
 /* HEADER */
-header {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background: rgba(0, 0, 0, 0.75);
-padding: 12px 40px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-z-index: 1000;
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(8px);
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+transition:0.3s;
+}
+
+header.scrolled{
+background:rgba(0,0,0,0.9);
+padding:10px 40px;
 }
 
 .logo{
 color:#00c896;
 font-size:24px;
 font-weight:bold;
+transition:0.3s;
+}
+
+header.scrolled .logo{
+font-size:20px;
 }
 
 nav{
@@ -62,22 +73,22 @@ span{
 color:#00c896;
 }
 
-/* HERO */
+/* HERO BACKGROUND FIX */
 .hero{
 min-height:100vh;
-background:url("https://images.unsplash.com/photo-1723384747376-90f201a3bd55?w=1200&auto=format&fit=crop&q=60") center/cover no-repeat;
+background:
+linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+url("https://images.unsplash.com/photo-1723384747376-90f201a3bd55?w=1200&auto=format&fit=crop&q=60") center/cover no-repeat;
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
 color:white;
-padding:15px;
+padding:120px 15px 20px;
 }
 
 .hero h1{
 font-size:35px;
-color:#fff;
-text-transform:capitalize;
 text-shadow:#000000c0 0px 7px 20px;
 }
 
@@ -97,7 +108,12 @@ cursor:pointer;
 border-radius:30px;
 font-size:16px;
 text-decoration:none;
-text-shadow:#000000c0 0px 5px 15px;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#13a56c;
+transform:scale(1.05);
 }
 
 section{
@@ -118,6 +134,12 @@ background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 7px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
 }
 
 .card img{
@@ -137,6 +159,23 @@ margin-top:30px;
 .gallery img{
 width:100%;
 border-radius:10px;
+transition:0.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* FADE ANIMATION */
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.6s ease;
+}
+
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
 }
 
 /* POPUP */
@@ -177,7 +216,7 @@ margin:8px 0;
 border:1px solid #ccc;
 }
 
-/* CONTACT BUTTON */
+/* CONTACT */
 .contact{
 position:fixed;
 bottom:20px;
@@ -207,7 +246,7 @@ padding:10px;
 margin-top:20px;
 }
 
-/* STOP SCROLL WHEN POPUP OPEN */
+/* SCROLL LOCK */
 body.popup-open{
 overflow:hidden;
 }
@@ -271,7 +310,7 @@ padding:10px 16px;
 </div>
 </section>
 
-<section id="about">
+<section id="about" class="fade-up">
 <h2>About Us</h2>
 <p>
 Luxury Stay Hotel offers comfortable rooms, premium facilities,
@@ -279,7 +318,7 @@ and excellent hospitality for our guests.
 </p>
 </section>
 
-<section id="rooms">
+<section id="rooms" class="fade-up">
 <h2>Our Rooms</h2>
 
 <div class="cards">
@@ -305,7 +344,7 @@ and excellent hospitality for our guests.
 </div>
 </section>
 
-<section id="services">
+<section id="services" class="fade-up">
 <h2>Our Services</h2>
 
 <div class="cards">
@@ -331,7 +370,7 @@ and excellent hospitality for our guests.
 </div>
 </section>
 
-<section id="gallery">
+<section id="gallery" class="fade-up">
 <h2>Gallery</h2>
 
 <div class="gallery">
@@ -397,6 +436,27 @@ popup.classList.remove("active");
 document.body.classList.remove("popup-open");
 }
 }
+
+/* HEADER SCROLL */
+window.addEventListener("scroll", function(){
+const header = document.querySelector("header");
+header.classList.toggle("scrolled", window.scrollY > 50);
+});
+
+/* ANIMATION */
+const elements = document.querySelectorAll(".fade-up");
+
+function reveal(){
+elements.forEach(el => {
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add("show");
+}
+});
+}
+
+window.addEventListener("scroll", reveal);
+reveal();
 
 </script>
 
