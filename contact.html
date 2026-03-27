@@ -6,7 +6,6 @@
 <title>Contact Us</title>
 
 <style>
-/* Reset & Global */
 *{
   margin:0;
   padding:0;
@@ -21,7 +20,7 @@ body{
   background:#f4f6f9;
 }
 
-/* Main content wrapper */
+/* Main content */
 .content-wrapper{
   flex:1;
   display:flex;
@@ -30,7 +29,7 @@ body{
   padding:20px;
 }
 
-/* Contact Container */
+/* Contact Box */
 .contact-container{
   background:white;
   padding:40px;
@@ -39,9 +38,11 @@ body{
   border-radius:10px;
   box-shadow:0 10px 30px rgba(0,0,0,0.1);
   text-align:center;
+
+  /* animation */
+  animation:fadeUp 0.8s ease;
 }
 
-/* Headings */
 .contact-container h1{
   margin-bottom:10px;
   font-size:28px;
@@ -50,10 +51,9 @@ body{
 .subtitle{
   color:#777;
   margin-bottom:25px;
-  font-size:16px;
 }
 
-/* Form Inputs */
+/* Inputs */
 form input,
 form textarea{
   width:100%;
@@ -61,22 +61,22 @@ form textarea{
   margin-bottom:15px;
   border:1px solid #ccc;
   border-radius:5px;
-  font-size:14px;
+  transition:0.3s;
 }
 
-textarea{
-  height:100px;
-  resize:none;
+form input:focus,
+form textarea:focus{
+  border-color:#019a3c;
+  box-shadow:0 0 5px rgba(1,154,60,0.3);
 }
 
-/* Button */
+/* Buttons */
 button{
   width:100%;
   padding:12px;
   background:#019a3c;
   border:none;
   color:white;
-  font-size:16px;
   border-radius:5px;
   cursor:pointer;
   transition:0.3s;
@@ -84,6 +84,7 @@ button{
 
 button:hover{
   background:#03851d;
+  transform:scale(1.03);
 }
 
 /* Popup */
@@ -97,7 +98,6 @@ button:hover{
   display:none;
   justify-content:center;
   align-items:center;
-  padding:20px;
   z-index:999;
 }
 
@@ -111,60 +111,34 @@ button:hover{
   animation:popup 0.4s ease;
 }
 
-.popup-content h2{
-  margin-bottom:10px;
-  color:#333;
+/* Footer FIXED */
+footer{
+  background:#0b3d2e;
+  color:#fff;
+  text-align:center;
+  padding:15px;
+  margin-top:auto;
+  font-size:14px;
 }
 
-.popup-content button{
-  margin-top:15px;
-  background:#019a3c;
-  color:white;
-  border:none;
-  padding:10px 20px;
-  border-radius:5px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.popup-content button:hover{
-  background:#03851d;
-}
-
-/* Popup Animation */
+/* Animations */
 @keyframes popup{
   from{transform:scale(0.7); opacity:0;}
   to{transform:scale(1); opacity:1;}
 }
 
-/* Footer Styles */
-footer{
-background:#0b3d2e;
-color:#fff;
-text-align:center;
-padding:10px;
-margin-top:20px;
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
 }
-/* Responsive Contact Form */
+
+/* Responsive */
 @media (max-width:768px){
-  .contact-container{
-    width:100%;
-    padding:25px;
-  }
-  .contact-container h1{font-size:24px;}
-  .subtitle{font-size:14px;}
-  form input, form textarea{font-size:13px; padding:10px;}
-  button{font-size:14px; padding:10px;}
-}
-@media (max-width:450px){
-  .contact-container{padding:20px;}
-  .contact-container h1{font-size:22px;}
-  .subtitle{font-size:13px;}
-  form input, form textarea{font-size:12px; padding:8px;}
-  button{font-size:13px; padding:8px;}
+  .contact-container{padding:25px;}
 }
 </style>
 </head>
+
 <body>
 
 <div class="content-wrapper">
@@ -175,15 +149,19 @@ margin-top:20px;
   <form id="contactForm">
     <input type="text" name="name" placeholder="Enter Your Name" required>
     <input type="email" name="email" placeholder="Enter Your Email" required>
-    <input type="number" name="phone" placeholder="Enter Phone Number" maxlength="11" required>
+    <input type="number" name="phone" placeholder="Enter Phone Number" required>
     <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button> <br><br>
-     <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+
+    <button type="submit">Send Message</button>
+    <br><br>
+    <button type="button" onclick="window.location.href='index.html'">
+      Back to Home
+    </button>
   </form>
 </div>
 </div>
 
-<!-- Thank You Popup -->
+<!-- Popup -->
 <div class="popup" id="thankPopup">
   <div class="popup-content">
     <h2>Thank You!</h2>
@@ -192,40 +170,37 @@ margin-top:20px;
   </div>
 </div>
 
-<!-- Footer -->
+<!-- ✅ FIXED FOOTER -->
+<footer>
+  © 2026 | Turrab Haider | All Rights Reserved
+</footer>
 
-  <div class="footer">
-    <div class="credit">&copy; 2026 | <span>Turrab Haider</span> All Rights Reserved</div>
-  </div>
-</section>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-// AJAX form submission to FormSubmit
 const form = document.getElementById("contactForm");
+
 form.addEventListener("submit", function(e){
-    e.preventDefault(); // Prevent redirect
+  e.preventDefault();
 
-    const formData = new FormData(form);
+  const formData = new FormData(form);
 
-    fetch("https://formsubmit.co/ajax/turrabhaider061@gmail.com", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("thankPopup").style.display = "flex";
-        form.reset();
-    })
-    .catch(error => {
-        alert("Oops! Something went wrong. Try again.");
-        console.error(error);
-    });
+  fetch("https://formsubmit.co/ajax/turrabhaider061@gmail.com", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("thankPopup").style.display = "flex";
+    form.reset();
+  })
+  .catch(error => {
+    alert("Something went wrong");
+  });
 });
 
 function closePopup(){
   document.getElementById("thankPopup").style.display="none";
 }
 </script>
+
 </body>
 </html>
