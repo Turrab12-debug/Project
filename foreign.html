@@ -17,6 +17,7 @@ scroll-behavior:smooth;
 body{
 background:#f6fff8;
 color:#333;
+padding-top:70px;
 }
 
 /* Header */
@@ -25,7 +26,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:15px 20px;
-background:rgba(11,61,46,0.9);
+background:rgba(11,61,46,0.95);
 color:#fff;
 position:fixed;
 width:100%;
@@ -58,7 +59,6 @@ text-decoration:none;
 padding:8px 16px;
 border-radius:6px;
 font-size:14px;
-position:relative;
 transition:0.3s;
 }
 
@@ -66,26 +66,9 @@ nav a:hover{
 background:#00c896;
 }
 
-nav a::after{
-content:"";
-position:absolute;
-left:50%;
-bottom:0;
-width:0%;
-height:2px;
-background:#00c896;
-transition:0.3s;
-transform:translateX(-50%);
-}
-
-nav a:hover::after{
-width:80%;
-}
-
 /* Hero */
 .hero{
-margin-top:70px;
-height:90vh;
+min-height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -140,10 +123,10 @@ background:#0b3d2e;
 
 /* Sections */
 .section{
-padding:100px 20px 40px;
+padding:80px 20px;
 text-align:center;
 opacity:0;
-transform:translateY(50px);
+transform:translateY(40px);
 transition:0.6s;
 }
 
@@ -165,7 +148,7 @@ background:#fff;
 border-radius:10px;
 overflow:hidden;
 box-shadow:0 5px 10px rgba(0,0,0,0.1);
-transition:0.4s;
+transition:0.3s;
 opacity:0;
 transform:scale(0.9);
 position:relative;
@@ -201,7 +184,8 @@ footer{
 background:#0b3d2e;
 color:#fff;
 text-align:center;
-padding:10px;
+padding:15px;
+font-size:14px;
 }
 
 /* Booking Popup */
@@ -226,7 +210,6 @@ padding:25px;
 border-radius:10px;
 width:300px;
 text-align:center;
-animation:fadeUp 0.4s ease;
 }
 
 .booking-box input,
@@ -253,6 +236,12 @@ cursor:pointer;
 background:#0b3d2e;
 }
 
+/* Image fix */
+img{
+max-width:100%;
+display:block;
+}
+
 /* MOBILE */
 @media(max-width:768px){
 
@@ -261,10 +250,13 @@ display:block;
 }
 
 nav{
-display:none;
-flex-direction:column;
+position:absolute;
+top:60px;
+left:0;
 width:100%;
-margin-top:10px;
+background:#0b3d2e;
+flex-direction:column;
+display:none;
 }
 
 nav.active{
@@ -272,11 +264,8 @@ display:flex;
 }
 
 nav a{
-margin:5px 0;
-}
-
-.hero{
-height:80vh;
+margin:10px 0;
+text-align:center;
 }
 
 .hero h1{
@@ -293,18 +282,6 @@ grid-template-columns:1fr;
 
 .booking-box{
 width:90%;
-}
-
-}
-
-@media(max-width:480px){
-
-.hero h1{
-font-size:22px;
-}
-
-.hero p{
-font-size:13px;
 }
 
 }
@@ -367,7 +344,7 @@ font-size:13px;
 </section>
 
 <footer>
-<p>© 2026 TURRAB HAIDER</p>
+<p><strong>© 2026 TURRAB HAIDER. All rights are reserved.</strong></p>
 </footer>
 
 <!-- Booking Popup -->
@@ -404,6 +381,12 @@ font-size:13px;
 function toggleMenu(){
 document.querySelector("nav").classList.toggle("active");
 }
+
+document.querySelectorAll("nav a").forEach(link=>{
+link.addEventListener("click",()=>{
+document.querySelector("nav").classList.remove("active");
+});
+});
 
 window.addEventListener("scroll",()=>{
 document.querySelectorAll(".section").forEach(sec=>{
