@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon</title>
+
+<style>
+/* Base styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #d4f1f4, #0b3d2e);
+  color: #000;
+}
+
+/* Glass card */
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Headings */
+h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+  color: #0b3d2e;
+}
+
+.line {
+  width: 60px;
+  height: 3px;
+  background: #0b3d2e;
+  margin: 15px auto;
+}
+
+#lineText {
+  font-size: 16px;
+  color: #0b3d2e;
+  height: 22px;
+  margin-bottom: 10px;
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.box {
+  background: rgba(11,61,46,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 60px;
+}
+
+.box span {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  color: #0b3d2e;
+}
+
+/* Email form */
+.notify-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notify-form input[type="email"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #0b3d2e;
+  outline: none;
+  width: 95%;
+  color: #000;
+  background: rgba(255,255,255,0.8);
+}
+
+.notify-form button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #0b3d2e;
+  background: #0b3d2e;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  width:30%;
+}
+
+.notify-form button:hover {
+  background: transparent;
+  color: #0b3d2e;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 10px;
+  font-size: 12px;
+  color: green;
+  background-color:black;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .glass-card {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .box {
+    min-width: 50px;
+    padding: 8px;
+  }
+
+  #lineText {
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glass-card">
+  <h1>Coming Soon</h1>
+  <div class="line"></div>
+  <div id="lineText"></div>
+
+  <div class="countdown">
+    <div class="box"><span id="d">0</span>Days</div>
+    <div class="box"><span id="h">0</span>Hours</div>
+    <div class="box"><span id="m">0</span>Minutes</div>
+    <div class="box"><span id="s">0</span>Seconds</div>
+  </div>
+
+  <!-- Notify Me Form -->
+  <form class="notify-form" onsubmit="alert('Thank you! We will notify you.'); return false;">
+    <input type="email" placeholder="Enter your email" required>
+    <button type="submit">Notify Me</button>
+  </form>
+</div>
+
+<div class="footer">© 2026 <strong>Turrab Haider</strong></div>
+
+<script>
+// Typing text effect
+const words = ["Launching soon...", "Stay with us...", "Almost ready..."];
+let i = 0, j = 0, deleting = false;
+
+function type() {
+  let text = words[i];
+  document.getElementById("lineText").innerText = text.substring(0, j);
+
+  if (!deleting && j < text.length) {
+    j++;
+  } else if (deleting && j > 0) {
+    j--;
+  } else {
+    deleting = !deleting;
+    i = (!deleting) ? (i + 1) % words.length : i;
+  }
+
+  setTimeout(type, deleting ? 50 : 100);
+}
+type();
+
+// LIVE COUNTDOWN
+const launchDate = new Date("April 5, 2026 00:00:00").getTime();
+
+const timer = setInterval(function () {
+  const now = new Date().getTime();
+  const diff = launchDate - now;
+
+  if (diff <= 0) {
+    clearInterval(timer);
+    document.querySelector(".countdown").innerHTML = "🚀 We Are Live!";
+    return;
+  }
+
+  document.getElementById("d").innerText = Math.floor(diff / (1000*60*60*24));
+  document.getElementById("h").innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  document.getElementById("m").innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+  document.getElementById("s").innerText = Math.floor((diff % (1000*60)) / 1000);
+
+}, 1000);
+</script>
+
+</body>
+</html>
