@@ -23,20 +23,8 @@ body {
   overflow: hidden;
 }
 
-/* Background glow */
-body::before {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: #00ffcc;
-  filter: blur(180px);
-  opacity: 0.2;
-  top: -100px;
-  left: -100px;
-}
-
-body::after {
+/* Glow background */
+body::before, body::after {
   content: "";
   position: absolute;
   width: 400px;
@@ -44,11 +32,19 @@ body::after {
   background: #00ffcc;
   filter: blur(150px);
   opacity: 0.2;
+}
+
+body::before {
+  top: -100px;
+  left: -100px;
+}
+
+body::after {
   bottom: -100px;
   right: -100px;
 }
 
-/* Glass card */
+/* Card */
 .container {
   backdrop-filter: blur(18px);
   background: rgba(255,255,255,0.08);
@@ -59,7 +55,6 @@ body::after {
   max-width: 420px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
   border: 1px solid rgba(255,255,255,0.2);
-  z-index: 1;
   animation: fadeIn 1s ease;
 }
 
@@ -77,10 +72,9 @@ h1 {
   font-size: 15px;
   opacity: 0.8;
   height: 20px;
-  margin-bottom: 15px;
 }
 
-/* Countdown */
+/* Timer */
 .countdown {
   display: flex;
   justify-content: center;
@@ -98,16 +92,14 @@ h1 {
 .time-box span {
   font-size: 22px;
   font-weight: bold;
-  display: block;
 }
 
-/* Progress bar */
+/* Progress */
 .progress {
   width: 100%;
   height: 6px;
   background: rgba(255,255,255,0.2);
   border-radius: 10px;
-  margin-top: 15px;
   overflow: hidden;
 }
 
@@ -115,10 +107,9 @@ h1 {
   height: 100%;
   width: 0%;
   background: #00ffcc;
-  transition: width 1s linear;
 }
 
-/* Email */
+/* Form */
 form {
   margin-top: 20px;
 }
@@ -128,7 +119,6 @@ input {
   padding: 10px;
   border-radius: 8px;
   border: none;
-  outline: none;
   margin-bottom: 10px;
 }
 
@@ -139,13 +129,8 @@ button {
   border: none;
   background: #00ffcc;
   color: #000;
-  cursor: pointer;
   font-weight: bold;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #fff;
+  cursor: pointer;
 }
 
 /* Footer */
@@ -179,7 +164,7 @@ button:hover {
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
-  <form onsubmit="alert('Thanks! You will be notified.'); return false;">
+  <form onsubmit="alert('Thanks! We will notify you.'); return false;">
     <input type="email" placeholder="Enter your email" required>
     <button type="submit">Notify Me</button>
   </form>
@@ -188,50 +173,65 @@ button:hover {
 <div class="footer">© 2026 Turrab Haider</div>
 
 <script>
-// Typing effect
-const textArr = ["Launching in a few minutes...", "Stay connected...", "We are almost live..."];
+// Typing text
+const texts = ["Launching in a few minutes...", "Stay with us...", "Almost ready..."];
 let ti = 0, tj = 0, del = false;
 
-function typing() {
-  let word = textArr[ti];
+function type() {
+  let word = texts[ti];
   document.getElementById("typing").innerText = word.substring(0, tj);
 
   if (!del && tj < word.length) tj++;
   else if (del && tj > 0) tj--;
   else {
     del = !del;
-    if (!del) ti = (ti + 1) % textArr.length;
+    if (!del) ti = (ti + 1) % texts.length;
   }
 
-  setTimeout(typing, del ? 50 : 100);
+  setTimeout(type, del ? 50 : 100);
 }
-typing();
+type();
 
-// 5 minute countdown
-const totalTime = 5 * 60;
-let remaining = totalTime;
+
+// ===== PERSISTENT TIMER =====
+const totalTime = 5 * 60; // 5 minutes
+
+let startTime = localStorage.getItem("startTime");
+
+if (!startTime) {
+  startTime = new Date().getTime();
+  localStorage.setItem("startTime", startTime);
+} else {
+  startTime = parseInt(startTime);
+}
 
 const timer = setInterval(() => {
+  const now = new Date().getTime();
+  const elapsed = Math.floor((now - startTime) / 1000);
+  let remaining = totalTime - elapsed;
+
+  if (remaining <= 0) {
+    clearInterval(timer);
+    localStorage.removeItem("startTime");
+
+    document.querySelector(".countdown").innerHTML = "We Are Live!";
+
+    setTimeout(() => {
+      window.location.href = "index2.html";
+    }, 2000);
+
+    return;
+  }
+
   let minutes = Math.floor(remaining / 60);
   let seconds = remaining % 60;
 
   document.getElementById("m").innerText = minutes;
   document.getElementById("s").innerText = seconds;
 
-  // progress bar
   let progress = ((totalTime - remaining) / totalTime) * 100;
   document.getElementById("progressBar").style.width = progress + "%";
 
-  if (remaining <= 0) {
-    clearInterval(timer);
-    document.querySelector(".countdown").innerHTML = "We Are Live!";
-
-    setTimeout(() => {
-      window.location.href = "index2.html";
-    }, 2000);
-  }
-
-  remaining--;
 }, 1000);
 </script>
 
