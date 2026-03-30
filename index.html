@@ -3,110 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coming Soon</title>
+<title>Launching Soon</title>
 
 <style>
-/* Base styles */
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #d4f1f4, #0b3d2e);
-  color: #000;
+  background: linear-gradient(135deg, #0b3d2e, #1f7a63);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Background glow */
+body::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: #00ffcc;
+  filter: blur(180px);
+  opacity: 0.2;
+  top: -100px;
+  left: -100px;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #00ffcc;
+  filter: blur(150px);
+  opacity: 0.2;
+  bottom: -100px;
+  right: -100px;
 }
 
 /* Glass card */
-.glass-card {
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.15);
+.container {
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.08);
   border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
-  max-width: 400px;
   width: 90%;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.3);
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  z-index: 1;
+  animation: fadeIn 1s ease;
 }
 
-/* Headings */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
 h1 {
-  font-size: 32px;
-  margin-bottom: 12px;
-  color: #0b3d2e;
-}
-
-.line {
-  width: 60px;
-  height: 3px;
-  background: #0b3d2e;
-  margin: 15px auto;
-}
-
-#lineText {
-  font-size: 16px;
-  color: #0b3d2e;
-  height: 22px;
+  font-size: 34px;
   margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 15px;
+  opacity: 0.8;
+  height: 20px;
+  margin-bottom: 15px;
 }
 
 /* Countdown */
 .countdown {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
 }
 
-.box {
-  background: rgba(11,61,46,0.1);
-  padding: 10px;
-  border-radius: 8px;
-  min-width: 60px;
+.time-box {
+  background: rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 10px;
+  min-width: 70px;
 }
 
-.box span {
-  font-size: 18px;
+.time-box span {
+  font-size: 22px;
   font-weight: bold;
   display: block;
-  color: #0b3d2e;
 }
 
-/* Email form */
-.notify-form {
+/* Progress bar */
+.progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #00ffcc;
+  transition: width 1s linear;
+}
+
+/* Email */
+form {
   margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
-.notify-form input[type="email"] {
+input {
+  width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #0b3d2e;
+  border: none;
   outline: none;
-  width: 95%;
-  color: #000;
-  background: rgba(255,255,255,0.8);
+  margin-bottom: 10px;
 }
 
-.notify-form button {
+button {
+  width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #0b3d2e;
-  background: #0b3d2e;
-  color: #fff;
+  border: none;
+  background: #00ffcc;
+  color: #000;
   cursor: pointer;
+  font-weight: bold;
   transition: 0.3s;
-  width:30%;
 }
 
-.notify-form button:hover {
-  background: transparent;
-  color: #0b3d2e;
+button:hover {
+  background: #fff;
 }
 
 /* Footer */
@@ -114,95 +153,85 @@ h1 {
   position: absolute;
   bottom: 10px;
   font-size: 12px;
-  color: green;
-  background-color:black;
+  opacity: 0.7;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .glass-card {
-    padding: 30px 20px;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  .box {
-    min-width: 50px;
-    padding: 8px;
-  }
-
-  #lineText {
-    font-size: 14px;
-  }
+/* Mobile */
+@media(max-width:480px){
+  h1 { font-size: 28px; }
+  .time-box { min-width: 60px; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="glass-card">
-  <h1>Coming Soon</h1>
-  <div class="line"></div>
-  <div id="lineText"></div>
+<div class="container">
+  <h1>🚀 Coming Soon</h1>
+  <div class="subtitle" id="typing"></div>
 
   <div class="countdown">
-    <div class="box"><span id="d">0</span>Days</div>
-    <div class="box"><span id="h">0</span>Hours</div>
-    <div class="box"><span id="m">0</span>Minutes</div>
-    <div class="box"><span id="s">0</span>Seconds</div>
+    <div class="time-box"><span id="m">0</span>Min</div>
+    <div class="time-box"><span id="s">0</span>Sec</div>
   </div>
 
-  <!-- Notify Me Form -->
-  <form class="notify-form" onsubmit="alert('Thank you! We will notify you.'); return false;">
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <form onsubmit="alert('Thanks! You will be notified.'); return false;">
     <input type="email" placeholder="Enter your email" required>
     <button type="submit">Notify Me</button>
   </form>
 </div>
 
-<div class="footer">© 2026 <strong>Turrab Haider</strong></div>
+<div class="footer">© 2026 Turrab Haider</div>
 
 <script>
-// Typing text effect
-const words = ["Launching soon...", "Stay with us...", "Almost ready..."];
-let i = 0, j = 0, deleting = false;
+// Typing effect
+const textArr = ["Launching in a few minutes...", "Stay connected...", "We are almost live..."];
+let ti = 0, tj = 0, del = false;
 
-function type() {
-  let text = words[i];
-  document.getElementById("lineText").innerText = text.substring(0, j);
+function typing() {
+  let word = textArr[ti];
+  document.getElementById("typing").innerText = word.substring(0, tj);
 
-  if (!deleting && j < text.length) {
-    j++;
-  } else if (deleting && j > 0) {
-    j--;
-  } else {
-    deleting = !deleting;
-    i = (!deleting) ? (i + 1) % words.length : i;
+  if (!del && tj < word.length) tj++;
+  else if (del && tj > 0) tj--;
+  else {
+    del = !del;
+    if (!del) ti = (ti + 1) % textArr.length;
   }
 
-  setTimeout(type, deleting ? 50 : 100);
+  setTimeout(typing, del ? 50 : 100);
 }
-type();
+typing();
 
-// LIVE COUNTDOWN
-const launchDate = new Date("April 5, 2026 00:00:00").getTime();
+// 5 minute countdown
+const totalTime = 5 * 60;
+let remaining = totalTime;
 
-const timer = setInterval(function () {
-  const now = new Date().getTime();
-  const diff = launchDate - now;
+const timer = setInterval(() => {
+  let minutes = Math.floor(remaining / 60);
+  let seconds = remaining % 60;
 
-  if (diff <= 0) {
+  document.getElementById("m").innerText = minutes;
+  document.getElementById("s").innerText = seconds;
+
+  // progress bar
+  let progress = ((totalTime - remaining) / totalTime) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
+
+  if (remaining <= 0) {
     clearInterval(timer);
-    document.querySelector(".countdown").innerHTML = "🚀 We Are Live!";
-    return;
+    document.querySelector(".countdown").innerHTML = "We Are Live!";
+
+    setTimeout(() => {
+      window.location.href = "index2.html";
+    }, 2000);
   }
 
-  document.getElementById("d").innerText = Math.floor(diff / (1000*60*60*24));
-  document.getElementById("h").innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-  document.getElementById("m").innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
-  document.getElementById("s").innerText = Math.floor((diff % (1000*60)) / 1000);
-
+  remaining--;
 }, 1000);
 </script>
 
